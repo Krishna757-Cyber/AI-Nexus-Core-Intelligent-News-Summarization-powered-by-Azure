@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Intelligent News Summarization</title>
+
+  <!-- Azure Speech SDK -->
+  <script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script>
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css"/>
+
+</head>
+<body>
+
+  <div class="grid-bg"></div>
+
+  <header>
+    <h1>
+    <span class="emoji-icon">🧠</span>
+
+    AI Nexus Core
+
+    <span class="paper-icon">📰</span>
+    </h1>
+    <p>Intelligent News Summarization powered by Azure</p>
+  </header>
+
+  <div class="robot-container" id="robotAvatar">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="AI Robot">
+  </div>
+
+  <!-- Configuration Panel -->
+  <div class="config-panel" id="configPanel">
+    <div class="config-header" onclick="toggleConfig()">
+      <span><i class="fa-solid fa-gears"></i> Azure API Configuration</span>
+      <i class="fa-solid fa-chevron-down" id="configIcon"></i>
+    </div>
+
+    <div class="config-content" id="configContent" style="display:none;">
+
+      <div class="config-group full-width">
+        <label>Azure Language Endpoint</label>
+        <input type="text" id="langEndpoint" placeholder="https://your-resource.cognitiveservices.azure.com/">
+      </div>
+
+      <div class="config-group">
+        <label>Azure Language Key</label>
+        <input type="password" id="langKey" placeholder="Language API Key">
+      </div>
+
+      <div class="config-group">
+        <label>Speech Service Region</label>
+        <input type="text" id="speechRegion" placeholder="e.g. koreacentral">
+      </div>
+
+      <div class="config-group">
+        <label>Speech Service Key</label>
+        <input type="password" id="speechKey" placeholder="Speech API Key">
+      </div>
+
+      <div class="config-group">
+        <label>Translator Region</label>
+        <input type="text" id="transRegion" placeholder="e.g. koreacentral">
+      </div>
+
+      <div class="config-group full-width">
+        <label>Translator Key</label>
+        <input type="password" id="transKey" placeholder="Translator API Key">
+      </div>
+
+      <div class="config-group full-width" style="align-items:flex-end;">
+        <button class="btn-save" onclick="saveKeys()">
+          <i class="fa-solid fa-floppy-disk"></i>
+          Save Credentials
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Main Interface -->
+  <div class="main-container">
+
+    <h2><i class="fa-solid fa-file-waveform"></i> Enter Article Data</h2>
+
+    <textarea id="articleInput" placeholder="Paste your article here..."></textarea>
+
+    <div class="controls-row">
+      <button class="btn-dictate" onclick="startVoiceInput()" id="micBtn">
+        <i class="fa-solid fa-microphone-lines"></i>
+        Dictate
+      </button>
+
+      <button class="btn-summarize" onclick="summarizeArticle()">
+        <i class="fa-solid fa-bolt"></i>
+        Summarize
+      </button>
+    </div>
+
+    <hr>
+
+    <h2><i class="fa-solid fa-language"></i> Localization & Output</h2>
+
+    <div class="controls-row">
+
+      <select id="languageSelect">
+        <option value="en">English</option>
+        <option value="hi">Hindi</option>
+        <option value="es">Spanish</option>
+        <option value="fr">French</option>
+        <option value="zh-Hans">Chinese</option>
+      </select>
+
+      <div class="btn-group">
+        <button class="btn-translate" onclick="translateSummary()">
+          <i class="fa-solid fa-earth-americas"></i>
+          Translate
+        </button>
+
+        <button class="btn-listen" onclick="speakSummary()">
+          <i class="fa-solid fa-headphones-simple"></i>
+          Listen
+        </button>
+      </div>
+    </div>
+
+    <div id="summaryOutput">
+      <div class="status-badge" id="statusBadge">Ready</div>
+      <span style="opacity:0.5;">
+        Awaiting data processing...
+      </span>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>
+      <i class="fa-solid fa-code"></i>
+      Enhanced 3D UI • Powered by Azure Cognitive Services
+    </p>
+  </footer>
+
+  <div id="toast">Settings Saved!</div>
+
+  <!-- External JS -->
+  <script src="script.js"></script>
+
+</body>
+</html>
